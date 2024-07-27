@@ -6,6 +6,8 @@
 <br>
 ‣ java 17
 <br>
+‣ Spring Data Jpa
+<br>
 ‣ AWS EC2
 <br>
 ‣ AWS RDS
