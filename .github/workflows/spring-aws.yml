@@ -13,7 +13,7 @@ on:
 jobs:
   build:
     # VM의실행 환경 지정
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     # 실행될 jobs를 순서대로 명시
     steps:
