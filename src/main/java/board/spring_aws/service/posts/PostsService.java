@@ -2,12 +2,16 @@ package board.spring_aws.service.posts;
 
 import board.spring_aws.domain.posts.Posts;
 import board.spring_aws.domain.posts.PostsRepository;
+import board.spring_aws.web.dto.PostsListResponseDto;
 import board.spring_aws.web.dto.PostsResponseDto;
 import board.spring_aws.web.dto.PostsSaveRequestDto;
 import board.spring_aws.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -33,4 +37,11 @@ public class PostsService {
         return new PostsResponseDto(entity);
     }
 
+    // postsRepository 결과로 넘어온 Posts의 Stream을 map을 통해 PostsListResponseDto 로 변환 -> List로 반환
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }
