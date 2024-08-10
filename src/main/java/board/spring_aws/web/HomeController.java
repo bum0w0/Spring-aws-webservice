@@ -1,5 +1,6 @@
 package board.spring_aws.web;
 
+import board.spring_aws.config.auth.LoginUser;
 import board.spring_aws.config.auth.dto.SessionUser;
 import board.spring_aws.service.posts.PostsService;
 import board.spring_aws.web.dto.PostsResponseDto;
@@ -18,9 +19,8 @@ public class HomeController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
