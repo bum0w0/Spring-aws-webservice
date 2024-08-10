@@ -32,7 +32,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 	compileOnly("org.springframework.boot:spring-boot-devtools")
-
+	// 스프링 시큐리티 의존성
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 }
 
