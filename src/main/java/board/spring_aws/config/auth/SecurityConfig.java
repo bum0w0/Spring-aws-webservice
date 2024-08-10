@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 
 @RequiredArgsConstructor
@@ -21,6 +20,14 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable())) // H2 콘솔 사용을 위한 옵션 비활성화
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/") // 로그인 페이지를 설정할 경우 (선택 사항)
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .userService(customOAuth2UserService) // OAuth2 사용자 정보 서비스 설정
+                        )
+                        .defaultSuccessUrl("/",true) // 로그인 성공 시 리디렉션할 URL
+                        .failureUrl("/login?error=true") // 로그인 실패 시 리디렉션할 URL
+                )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile").permitAll() // 지정된 경로에 대한 접근 허용
                         .requestMatchers("/api/v1/**").hasRole(Role.USER.name()) // 특정 역할을 가진 사용자만 접근 가능
@@ -28,11 +35,6 @@ public class SecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutSuccessUrl("/") // 로그아웃 성공 시 리디렉션할 URL
-                )
-                .oauth2Login(oauth2 -> oauth2
-                        .userInfoEndpoint(userInfo -> userInfo
-                                .userService(customOAuth2UserService) // OAuth2 사용자 정보 서비스 설정
-                        )
                 );
 
         return http.build();
