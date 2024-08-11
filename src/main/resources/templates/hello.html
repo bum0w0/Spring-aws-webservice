@@ -34,7 +34,12 @@
     </tr>
     </thead>
     <tbody id="tbody">
-
+    <tr th:each="post : ${posts}">
+      <td th:text="${post.id}">1</td>
+      <td th:text="${post.title}">Title</td>
+      <td th:text="${post.author}">Author</td>
+      <td th:text="${post.modifiedDate}">Date</td>
+    </tr>
     </tbody>
   </table>
 </div>
