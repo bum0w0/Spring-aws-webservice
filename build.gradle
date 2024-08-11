@@ -36,6 +36,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
+
+	implementation 'org.springframework.session:spring-session-jdbc'
+	implementation 'org.mariadb.jdbc:mariadb-java-client' // MariaDB JDBC 드라이버
+
 }
 
 tasks.named('test') {

@@ -38,3 +38,4 @@ out/
 
 # OAuth properties file
 application-oauth.properties
+application-real-db.properties
