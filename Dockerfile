@@ -17,9 +17,6 @@ WORKDIR /app
 # 빌더 이미지에서 JAR 파일 복사
 COPY --from=builder /build/build/libs/spring-aws-0.0.1-SNAPSHOT.jar spring-app.jar
 
-# oauth 설정 파일 복사
-COPY /Users/kimjinbeom/Desktop/spring-aws/src/main/resources/application-oauth.properties /config/application-oauth.properties
-
 EXPOSE 8080
 
 # 컨테이너를 non-root 사용자로 실행
@@ -29,7 +26,6 @@ USER nobody:nogroup
 ENTRYPOINT [ \
    "java", \
    "-jar", \
-   "-Dspring.config.location=classpath:/application.properties,/config/application-oauth.properties", \
    "-Djava.security.egd=file:/dev/./urandom", \
    "-Dsun.net.inetaddr.ttl=0", \
    "spring-app.jar" \
