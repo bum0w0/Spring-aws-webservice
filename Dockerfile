@@ -18,7 +18,7 @@ WORKDIR /app
 COPY --from=builder /build/build/libs/spring-aws-0.0.1-SNAPSHOT.jar spring-app.jar
 
 # oauth 설정 파일 복사
-COPY src/main/resources/application-oauth.properties /config/application-oauth.properties
+COPY /Users/kimjinbeom/Desktop/spring-aws/src/main/resources/application-oauth.properties /config/application-oauth.properties
 
 EXPOSE 8080
 
