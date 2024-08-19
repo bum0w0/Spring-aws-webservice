@@ -64,6 +64,10 @@ jobs:
           sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
           sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
 
-          sudo docker run -p ${{ secrets.PORT }}:${{ secrets.PORT }} \
+          sudo docker run -d \
           --name ${{ secrets.PROJECT_NAME }} \
-          -d ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
+          -p ${{ secrets.PORT }}:${{ secrets.PORT }} \
+          -v /home/ec2-user/application-oauth.properties:/config/application-oauth.properties \
+          -v /home/ec2-user/application-real-db.properties:/config/application-real-db.properties \
+          -e "SPRING_CONFIG_LOCATION=/config/application-oauth.properties,/config/application-real-db.properties" \
+          ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
