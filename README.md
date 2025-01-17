@@ -20,3 +20,7 @@
 ‣ Docker
 <br>
 ‣ Github Actions
+
+<hr>
+
+<img width="1399" alt="스크린샷 2024-08-11 오후 9 05 56" src="https://github.com/user-attachments/assets/9ac7f733-ade1-4e1d-9d5a-8824a9f0d93f">
